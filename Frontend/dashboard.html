@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Control de Despachos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .kpi-card {
+            background: var(--surface);
+            padding: 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+
+        .kpi-title {
+            color: var(--secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .kpi-icon {
+            float: right;
+            font-size: 2rem;
+            color: var(--primary);
+            opacity: 0.2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="topbar-brand">
+            <i class="ri-truck-line"></i>
+            Control de Despachos
+        </div>
+        <div class="topbar-user">
+            <div class="avatar"
+                style="width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: grid; place-items: center;">
+                MV
+            </div>
+            <span>Marco V. (Operador)</span>
+        </div>
+    </header>
+
+    <nav class="workflow-nav">
+        <a href="ov_generadas.html" class="workflow-step">1. OVs Generadas</a>
+        <a href="ov_emitidas.html" class="workflow-step">2. OVs Emitidas</a>
+        <a href="hojas_ruta.html" class="workflow-step">3. Hojas de Ruta & Despacho</a>
+        <a href="dashboard.html" class="workflow-step active">4. Dashboard Cierre</a>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Dashboard de Despachos (KPIs del Día)</h1>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card" style="border-left: 4px solid var(--primary);">
+                <i class="ri-route-line kpi-icon"></i>
+                <div class="kpi-title">Despachos Totales (Día)</div>
+                <div class="kpi-value">45</div>
+            </div>
+            <div class="kpi-card" style="border-left: 4px solid var(--status-green);">
+                <i class="ri-check-double-line kpi-icon" style="color: var(--status-green);"></i>
+                <div class="kpi-title">Entregas Completas</div>
+                <div class="kpi-value">38</div>
+            </div>
+            <div class="kpi-card" style="border-left: 4px solid var(--status-yellow);">
+                <i class="ri-error-warning-line kpi-icon" style="color: var(--status-yellow);"></i>
+                <div class="kpi-title">Entregas Parciales</div>
+                <div class="kpi-value">5</div>
+            </div>
+            <div class="kpi-card" style="border-left: 4px solid var(--status-red);">
+                <i class="ri-close-circle-line kpi-icon" style="color: var(--status-red);"></i>
+                <div class="kpi-title">No Recibidos / Pendientes</div>
+                <div class="kpi-value">2</div>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 24px;">
+            <h3 style="margin-bottom: 16px;">Progreso de Hojas de Ruta</h4>
+                <div style="background: #f1f5f9; height: 24px; border-radius: 12px; overflow: hidden; width: 100%;">
+                    <div
+                        style="background: var(--status-green); width: 85%; height: 100%; display: flex; align-items:center; justify-content: center; color: white; font-weight: 600; font-size: 0.75rem;">
+                        85% Completado</div>
+                </div>
+                <p style="margin-top: 12px; color: var(--secondary); font-size: 0.875rem;">17 de 20 Hojas de ruta
+                    cerradas exitosamente.</p>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
