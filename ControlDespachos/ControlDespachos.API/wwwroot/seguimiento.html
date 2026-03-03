@@ -236,6 +236,31 @@
           </div>
         </div>
       </div>
+      <div class="detail-section" style="padding:20px 24px;border-bottom:1px solid var(--border)">
+        <h4>Artículos</h4>
+        <div class="table-wrap" style="margin-top:12px; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
+          <table style="width:100%;font-size:.82rem">
+            <thead style="background:#f1f5f9;border-bottom:1px solid #e2e8f0">
+              <tr>
+                <th style="padding:8px 12px;text-align:left;color:var(--text-muted);font-weight:700">Cód. Pieza</th>
+                <th style="padding:8px 12px;text-align:left;color:var(--text-muted);font-weight:700">Descripción</th>
+                <th style="padding:8px 12px;text-align:right;color:var(--text-muted);font-weight:700">Cant.</th>
+                <th style="padding:8px 12px;text-align:left;color:var(--text-muted);font-weight:700">UDM</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${(g.items || []).map(it => `
+                <tr style="border-bottom:1px solid #f1f5f9">
+                  <td style="padding:8px 12px;font-weight:600">${it.codigo_pieza}</td>
+                  <td style="padding:8px 12px">${it.descripcion}</td>
+                  <td style="padding:8px 12px;text-align:right">${it.cantidad.toLocaleString()}</td>
+                  <td style="padding:8px 12px">${it.udm}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
       ${g._cierre ? `<div style="padding:20px 24px;border-bottom:1px solid var(--border)">
         <div class="detail-section" style="margin:0"><h4>Detalle de la Entrega</h4>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px">
