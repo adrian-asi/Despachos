@@ -145,4 +145,3 @@ C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.API\o
 C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.API\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.API\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
