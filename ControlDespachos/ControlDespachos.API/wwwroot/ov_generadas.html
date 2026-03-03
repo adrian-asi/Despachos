@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Órdenes de Venta - Control de Despachos</title>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/notas.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -66,7 +67,7 @@
               <th style="min-width:90px">Cantidad</th>
               <th style="min-width:90px">F. Necesidad</th>
               <th style="min-width:110px">Estado</th>
-              <th class="col-sticky-right" style="min-width:100px">Acciones</th>
+              <th class="col-sticky-right" style="min-width:180px">Acciones</th>
             </tr>
             <tr class="col-filters" style="background:#f8fafc">
               <th></th>
@@ -168,6 +169,7 @@
   </div>
 
   <script src="js/shared.js"></script>
+  <script src="js/notas.js"></script>
   <script>
     const user = requireAuth();
     document.getElementById('nav-placeholder').innerHTML = renderNav('ov_generadas');
@@ -263,6 +265,7 @@
           <td class="col-sticky-right">
             <div style="display:flex;gap:5px">
               <button class="btn btn-sm btn-secondary" onclick="verDetalle('${o.id}')" title="Ver detalle"><span class="material-icons" style="font-size:15px">visibility</span></button>
+              ${notasBtn(o.id, o.numero_ov)}
               ${canEmit ? `<button class="btn btn-sm btn-primary" onclick="abrirEmitir('${o.id}')" title="Emitir GRE"><span class="material-icons" style="font-size:15px">receipt_long</span></button>` : ''}
             </div>
           </td>
@@ -439,6 +442,7 @@
     // Cerrar modal al hacer clic fuera
     document.querySelectorAll('.modal-overlay').forEach(el => el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); }));
 
+    window._onNotasClose = function () { render(); };
     init();
   </script>
 </body>

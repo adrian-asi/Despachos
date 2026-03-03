@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seguimiento de Guías - Control de Despachos</title>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/notas.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -114,6 +115,7 @@
   </div>
 
   <script src="js/shared.js"></script>
+  <script src="js/notas.js"></script>
   <script>
     requireAuth();
     document.getElementById('nav-placeholder').innerHTML = renderNav('seguimiento');
@@ -256,6 +258,9 @@
           <button class="btn btn-secondary" style="width:100%;margin-top:12px" onclick="abrirDocsGuia(currentGuia?.numero_gre)">
             <span class="material-icons">folder_open</span> Gestionar Documentos
           </button>
+          <button class="btn btn-secondary" style="width:100%;margin-top:8px" onclick="abrirNotas(currentGuia?.ov_id, currentGuia?.numero_ov)">
+            <span class="material-icons">chat</span> Ver Notas / Indicaciones
+          </button>
           <div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:8px;font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:8px">
             <span class="material-icons" style="font-size:16px;color:var(--green)">sync</span>
             Última sincronización: Hace 2 minutos
@@ -302,6 +307,7 @@
       da.addEventListener('dragleave', () => { da.style.borderColor = ''; });
       da.addEventListener('drop', e => { e.preventDefault(); da.style.borderColor = ''; agregarArchivosSeq(e.dataTransfer.files); });
     }, 500);
+    window._onNotasClose = function () { if (currentGuia) selectGuia(currentGuia.id); };
     init();
   </script>
 </body>

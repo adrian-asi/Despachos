@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programación de Guías - Control de Despachos</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/notas.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -57,7 +58,7 @@
                             <th style="min-width:110px">Cant. Emitida</th>
                             <th style="min-width:100px">Estado GRE</th>
                             <th style="min-width:100px">Hoja Ruta</th>
-                            <th class="col-sticky-right" style="min-width:130px">Acciones</th>
+                            <th class="col-sticky-right" style="min-width:200px">Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyGREs"></tbody>
@@ -70,6 +71,22 @@
     </div>
 
     <!-- MODAL PROGRAMAR -->
+    <!-- MODAL DETALLE OV -->
+    <div class="modal-overlay" id="modalDetalleOV">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3><span class="material-icons" style="color:var(--primary)">assignment</span> Detalle de Orden de
+                    Venta</h3>
+                <button class="close-modal" onclick="closeModal('modalDetalleOV')"><span
+                        class="material-icons">close</span></button>
+            </div>
+            <div class="modal-body" id="detalleOVBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('modalDetalleOV')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="modalProgramar">
         <div class="modal modal-lg">
             <div class="modal-header">
@@ -205,6 +222,7 @@
     </div>
 
     <script src="js/shared.js"></script>
+    <script src="js/notas.js"></script>
     <script>
         requireAuth();
         document.getElementById('nav-placeholder').innerHTML = renderNav('ov_emitidas');
@@ -263,7 +281,7 @@
                 return `<tr>
     <td><input type="checkbox" class="row-cb" data-id="${g.id}" ${selectedGREIds.includes(g.id) ? 'checked' : ''}></td>
     <td><strong style="color:var(--primary);font-size:.88rem">${g.numero_gre}</strong></td>
-    <td style="font-size:.83rem">${g.numero_ov}</td>
+    <td><a href="#" onclick="verDetalleOV('${g.ov_id}');return false" style="color:var(--primary);font-weight:600;text-decoration:none;font-size:.83rem" title="Ver detalle OV">${g.numero_ov}</a></td>
     <td style="font-size:.83rem">${ov.numero_ot || '—'}</td>
     <td><div class="text-strong">${g.cliente_nombre}</div><div class="text-sm">${g.distrito}</div></td>
     <td style="font-size:.82rem">${g.vendedor_ov || '—'}</td>
@@ -272,11 +290,12 @@
     <td style="font-size:.82rem">${g.domicilio_destino}</td>
     <td style="white-space:nowrap">${g.cantidad_emitida.toLocaleString()} / ${g.cantidad_ov.toLocaleString()}</td>
     <td>${semaforo(g.estado_gre)} ${badge(g.estado_gre, badgeEstado(g.estado_gre))}</td>
-    <td>${g.hoja_ruta_id ? badge(g.hoja_ruta_id, 'badge-blue') : '<span class="text-sm">—</span>'}</td>
+    <td>${g.hoja_ruta_id ? hojaRutaLink(g.hoja_ruta_id) : '<span class="text-sm">—</span>'}</td>
     <td class="col-sticky-right">
       <div style="display:flex;gap:4px">
         <button class="btn btn-sm btn-secondary" onclick="verDetalleGre('${g.id}')" title="Ver detalle GRE"><span class="material-icons" style="font-size:14px">visibility</span></button>
         <button class="btn btn-sm btn-secondary" onclick="adjuntarDocs('${g.numero_gre}')" title="Documentos"><span class="material-icons" style="font-size:14px">attach_file</span></button>
+        ${notasBtn(g.ov_id, g.numero_ov)}
         ${!g.programada ? `<button class="btn btn-sm btn-primary" onclick="abrirProgramarUno('${g.id}')" title="Programar"><span class="material-icons" style="font-size:14px">add_road</span></button>` : `<span class="badge badge-green" style="font-size:.72rem">✓ En ruta</span>`}
       </div>
     </td>
@@ -312,7 +331,7 @@
                         <div class="detail-item"><div class="detail-label">Fecha Emisión</div><div class="detail-value">${g.fecha_emision}</div></div>
                         <div class="detail-item"><div class="detail-label">Hora Emisión</div><div class="detail-value">${g.hora_emision}</div></div>
                         <div class="detail-item"><div class="detail-label">Estado GRE</div><div class="detail-value">${semaforo(g.estado_gre)} ${badge(g.estado_gre, badgeEstado(g.estado_gre))}</div></div>
-                        <div class="detail-item"><div class="detail-label">Hoja de Ruta</div><div class="detail-value">${g.hoja_ruta_id || '—'}</div></div>
+                        <div class="detail-item"><div class="detail-label">Hoja de Ruta</div><div class="detail-value">${g.hoja_ruta_id ? hojaRutaLink(g.hoja_ruta_id) : '—'}</div></div>
                     </div>
                     <!-- Trazabilidad emisión -->
                     <div style="margin-top:12px;padding:10px 14px;background:var(--blue-bg);border-radius:8px;font-size:.8rem;color:#1e40af;display:flex;gap:16px;flex-wrap:wrap">
@@ -450,10 +469,76 @@
             const h = ['N° GRE', 'N° OV', 'Cliente', 'Cant. Emitida', 'Estado'], r = filtered.map(g => [g.numero_gre, g.numero_ov, g.cliente_nombre, g.cantidad_emitida, g.estado_gre]);
             const csv = [h, ...r].map(x => x.join(',')).join('\n'); const a = document.createElement('a'); a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv); a.download = 'guias.csv'; a.click();
         }
+        function hojaRutaLink(hojaId) {
+            const h = hojas.find(x => x.id === hojaId);
+            const label = h ? h.numero : hojaId;
+            return `<a href="hojas_ruta.html?hoja=${encodeURIComponent(hojaId)}" class="badge badge-blue" style="text-decoration:none;cursor:pointer" title="Ver Hoja de Ruta ${label}"><span class="material-icons" style="font-size:13px;vertical-align:middle;margin-right:2px">route</span>${label}</a>`;
+        }
+
+        function verDetalleOV(ovId) {
+            const ov = ovs.find(o => o.id === ovId);
+            if (!ov) return;
+            document.getElementById('detalleOVBody').innerHTML = `
+                <div class="detail-section">
+                    <h4>Información Principal</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">N° OV</div><div class="detail-value" style="color:var(--primary);font-weight:700">${ov.numero_ov}</div></div>
+                        <div class="detail-item"><div class="detail-label">Estado</div><div class="detail-value">${semaforo(ov.estado)} ${badge(ov.estado, badgeEstado(ov.estado))}</div></div>
+                        <div class="detail-item"><div class="detail-label">OC / Cotización</div><div class="detail-value">${ov.oc_cotizacion || '—'}</div></div>
+                        <div class="detail-item"><div class="detail-label">N° OT</div><div class="detail-value">${ov.numero_ot || '—'}</div></div>
+                        <div class="detail-item"><div class="detail-label">Fecha Creación</div><div class="detail-value">${ov.fecha_creacion}</div></div>
+                        <div class="detail-item"><div class="detail-label">Hora</div><div class="detail-value">${ov.hora_creacion}</div></div>
+                        <div class="detail-item"><div class="detail-label">F. Necesidad</div><div class="detail-value" style="color:var(--red);font-weight:700">${ov.fecha_necesidad}</div></div>
+                        <div class="detail-item"><div class="detail-label">Vendedor</div><div class="detail-value" style="font-weight:600;color:var(--primary)">${ov.vendedor || ov.solicitado_por}</div></div>
+                        <div class="detail-item"><div class="detail-label">Solicitado Por</div><div class="detail-value">${ov.solicitado_por}</div></div>
+                    </div>
+                    <div style="margin-top:12px;padding:10px 14px;background:var(--blue-bg);border-radius:8px;font-size:.8rem;color:#1e40af;display:flex;gap:16px;flex-wrap:wrap">
+                        <span><span class="material-icons" style="font-size:14px;vertical-align:middle">schedule</span> <strong>Creada:</strong> ${ov.fecha_creacion} ${ov.hora_creacion}</span>
+                        <span><span class="material-icons" style="font-size:14px;vertical-align:middle">person</span> <strong>Vendedor:</strong> ${ov.vendedor || ov.solicitado_por}</span>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4>Cliente y Destino</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item"><div class="detail-label">Cliente</div><div class="detail-value">${ov.cliente_nombre}</div></div>
+                        <div class="detail-item"><div class="detail-label">Área Solicitante</div><div class="detail-value">${ov.area_solicitante}</div></div>
+                        <div class="detail-item"><div class="detail-label">Dirección Destino</div><div class="detail-value">${ov.domicilio_destino}</div></div>
+                        <div class="detail-item"><div class="detail-label">Distrito</div><div class="detail-value">${ov.distrito}, ${ov.pais}</div></div>
+                        <div class="detail-item"><div class="detail-label">Courier Sugerido</div><div class="detail-value">${ov.courier_sugerido}</div></div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4>Artículos</h4>
+                    <div class="table-wrap" style="margin-top:10px; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
+                        <table style="width:100%;font-size:.85rem; border-collapse:collapse;">
+                            <thead>
+                                <tr style="background:#f1f5f9; border-bottom:1px solid #cbd5e1;">
+                                    <th style="padding:10px;text-align:left">Cód. Pieza</th>
+                                    <th style="padding:10px;text-align:left">Descripción</th>
+                                    <th style="padding:10px;text-align:right">Cantidad</th>
+                                    <th style="padding:10px;text-align:center">UDM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${(ov.items || []).map(it => `
+                                    <tr style="border-bottom:1px solid #e2e8f0; background:#fff;">
+                                        <td style="padding:10px;">${it.codigo}</td>
+                                        <td style="padding:10px;font-weight:500">${it.descripcion}</td>
+                                        <td style="padding:10px;text-align:right">${it.cantidad.toLocaleString()}</td>
+                                        <td style="padding:10px;text-align:center">${it.udm}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>`;
+            openModal('modalDetalleOV');
+        }
         function openModal(id) { document.getElementById(id).classList.add('open'); }
         function closeModal(id) { document.getElementById(id).classList.remove('open'); }
         function showToast(msg, type = 'info') { const t = document.createElement('div'); t.style.cssText = `position:fixed;bottom:24px;right:24px;z-index:9999;background:${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#1754cf'};color:white;padding:12px 20px;border-radius:10px;font-size:.875rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2)`; t.textContent = msg; document.body.appendChild(t); setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 3000); }
         document.querySelectorAll('.modal-overlay').forEach(el => el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); }));
+        window._onNotasClose = function () { render(); };
         init();
     </script>
 </body>

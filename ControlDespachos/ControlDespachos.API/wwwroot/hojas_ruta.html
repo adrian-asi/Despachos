@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hojas de Ruta - Control de Despachos</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/notas.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -289,6 +290,7 @@
     </div>
 
     <script src="js/shared.js"></script>
+    <script src="js/notas.js"></script>
     <script>
         requireAuth();
         document.getElementById('nav-placeholder').innerHTML = renderNav('hojas_ruta');
@@ -316,6 +318,12 @@
             });
             localStorage.setItem('hojas_data', JSON.stringify(hojas));
             renderHojasList();
+            // Deep-link: auto-seleccionar hoja si viene de ov_emitidas con ?hoja=id
+            const params = new URLSearchParams(window.location.search);
+            const hojaParam = params.get('hoja');
+            if (hojaParam && hojas.find(h => h.id === hojaParam)) {
+                selectHoja(hojaParam);
+            }
             // Setup drag & drop docs
             const da = document.getElementById('docsDropArea');
             da.addEventListener('dragover', e => { e.preventDefault(); da.style.borderColor = 'var(--primary)'; });
@@ -414,7 +422,7 @@
             <th>Dirección</th>
             <th>Cantidad</th>
             <th>Estado Entrega</th>
-            <th style="width:200px">Acciones</th>
+            <th style="width:260px">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -439,15 +447,16 @@
                     : '<span class="badge badge-gray">⏳ Pendiente</span>'
                 }</td>
             <td>
-              <div style="display:flex;gap:4px;flex-wrap:wrap">
+              <div style="display:flex;gap:4px;flex-wrap:nowrap">
                 <!-- VER DETALLE -->
                 <button class="btn btn-sm btn-secondary" onclick="verDetalleGre('${g.id}')" title="Ver detalle de la guía">
                   <span class="material-icons" style="font-size:14px">visibility</span>
                 </button>
-                <!-- DOCUMENTOS -->
                 <button class="btn btn-sm btn-secondary" onclick="abrirDocumentos('${g.numero_gre}')" title="Documentos adjuntos">
                   <span class="material-icons" style="font-size:14px">attach_file</span>
                 </button>
+                <!-- NOTAS -->
+                ${notasBtn(g.ov_id, g.numero_ov)}
                 ${!esCerrada ? `
                 <!-- LIQUIDAR -->
                 <button class="btn btn-sm ${g._cierre ? 'btn-secondary' : 'btn-primary'}" onclick="abrirCierre('${g.id}','${g.numero_gre}')" title="${g._cierre ? 'Editar liquidación' : 'Liquidar entrega'}">
@@ -522,6 +531,32 @@
         <div class="detail-item"><div class="detail-label">Cant. Emitida</div><div class="detail-value" style="color:var(--primary);font-size:1.15rem">${g.cantidad_emitida.toLocaleString()}</div></div>
         ${ov.almacen_origen ? `<div class="detail-item"><div class="detail-label">Almacén Origen</div><div class="detail-value">${ov.almacen_origen}</div></div>` : ''}
         ${ov.courier_sugerido ? `<div class="detail-item"><div class="detail-label">Courier</div><div class="detail-value">${ov.courier_sugerido}</div></div>` : ''}
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h4>Artículos</h4>
+      <div class="table-wrap" style="margin-top:10px; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
+        <table style="width:100%;font-size:.85rem; border-collapse:collapse;">
+          <thead>
+            <tr style="background:#f1f5f9; border-bottom:1px solid #cbd5e1;">
+              <th style="padding:10px;text-align:left">Cód. Pieza</th>
+              <th style="padding:10px;text-align:left">Descripción</th>
+              <th style="padding:10px;text-align:right">Cantidad</th>
+              <th style="padding:10px;text-align:center">UDM</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${(g.items || ov.items || []).map(it => `
+              <tr style="border-bottom:1px solid #e2e8f0; background:#fff;">
+                <td style="padding:10px;">${it.codigo}</td>
+                <td style="padding:10px;font-weight:500">${it.descripcion}</td>
+                <td style="padding:10px;text-align:right">${it.cantidad.toLocaleString()}</td>
+                <td style="padding:10px;text-align:center">${it.udm}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -769,6 +804,7 @@
         }
         document.querySelectorAll('.modal-overlay').forEach(el => el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); }));
 
+        window._onNotasClose = function () { if (currentHojaId) selectHoja(currentHojaId); };
         init();
     </script>
 </body>
