@@ -1,0 +1,16 @@
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\bin\Debug\net8.0\ControlDespachos.Data.deps.json
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\bin\Debug\net8.0\ControlDespachos.Data.dll
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\bin\Debug\net8.0\ControlDespachos.Data.pdb
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\bin\Debug\net8.0\ControlDespachos.Core.dll
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\bin\Debug\net8.0\ControlDespachos.Core.pdb
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.csproj.AssemblyReference.cache
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.AssemblyInfoInputs.cache
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.AssemblyInfo.cs
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.csproj.CoreCompileInputs.cache
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.sourcelink.json
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlD.698AAD3A.Up2Date
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.dll
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\refint\ControlDespachos.Data.dll
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ControlDespachos.Data.pdb
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Data\obj\Debug\net8.0\ref\ControlDespachos.Data.dll
