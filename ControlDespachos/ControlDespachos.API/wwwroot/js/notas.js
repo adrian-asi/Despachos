@@ -208,7 +208,8 @@
 
     // ─── READ/UNREAD TRACKING ────────────────────────────────────
     function _getReadData() {
-        try { return JSON.parse(localStorage.getItem('notas_read') || '{}'); }
+        const userId = _getUser()?.name || 'anonymous';
+        try { return JSON.parse(localStorage.getItem('notas_read_' + userId) || '{}'); }
         catch { return {}; }
     }
 
@@ -216,16 +217,37 @@
         if (!ovId) return;
         const data = _getReadData();
         data[ovId] = Date.now();
-        localStorage.setItem('notas_read', JSON.stringify(data));
+        const userId = _getUser()?.name || 'anonymous';
+        localStorage.setItem('notas_read_' + userId, JSON.stringify(data));
     }
 
     function _hasUnread(ovId) {
         const notas = _getAllNotas().filter(n => n.ov_id === ovId);
         if (!notas.length) return false;
+
+        const currentUser = _getUser()?.name || '';
         const readData = _getReadData();
         const lastRead = readData[ovId] || 0;
+
+        // Find the latest message that was NOT written by the current user
+        const otherNotas = notas.filter(n => n.user_name !== currentUser);
+
+        // If there are no messages from other users, and I've read/closed my own notes, it's not unread.
+        // Actually, let's just use the max timestamp of ANY note.
+        // Because if I wrote it, my lastRead was updated.
+        // But to be completely safe and avoid brief flashes of red:
         const lastMsg = Math.max(...notas.map(n => n.timestamp));
-        return lastMsg > lastRead;
+
+        // If the only notes are mine and lastRead is somewhat delayed, we still don't want it to show as unread for the creator.
+        if (lastMsg > lastRead) {
+            // Is the latest message mine?
+            const latestNote = notas.find(n => n.timestamp === lastMsg);
+            if (latestNote && latestNote.user_name === currentUser) {
+                return false; // I wrote the latest message, so count it as read for me
+            }
+            return true;
+        }
+        return false;
     }
 
     // ─── CONTADOR DE NOTAS POR OV ────────────────────────────────
