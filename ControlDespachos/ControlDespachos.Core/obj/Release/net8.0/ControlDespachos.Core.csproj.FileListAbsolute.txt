@@ -1,0 +1,12 @@
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\bin\Release\net8.0\ControlDespachos.Core.deps.json
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\bin\Release\net8.0\ControlDespachos.Core.dll
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\bin\Release\net8.0\ControlDespachos.Core.pdb
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ControlDespachos.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ControlDespachos.Core.AssemblyInfoInputs.cache
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ControlDespachos.Core.AssemblyInfo.cs
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ControlDespachos.Core.csproj.CoreCompileInputs.cache
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ControlDespachos.Core.sourcelink.json
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ControlDespachos.Core.dll
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\refint\ControlDespachos.Core.dll
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ControlDespachos.Core.pdb
+C:\Users\analistaqds\Downloads\Despachos\ControlDespachos\ControlDespachos.Core\obj\Release\net8.0\ref\ControlDespachos.Core.dll

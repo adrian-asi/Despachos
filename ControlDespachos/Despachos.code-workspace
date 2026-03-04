@@ -3,10 +3,6 @@
 		{
 			"name": "ControlDespachos",
 			"path": "."
-		},
-		{
-			"name": "PRUEBA01",
-			"path": "../../PRUEBA01"
 		}
 	],
 	"settings": {}
