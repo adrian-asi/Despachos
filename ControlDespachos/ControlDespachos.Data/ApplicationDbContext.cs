@@ -21,6 +21,8 @@ namespace ControlDespachos.Data
         public DbSet<CierreGuia> CierresGuia { get; set; }
         public DbSet<CierreHojaRuta> CierresHojaRuta { get; set; }
         public DbSet<AdjuntoGuia> AdjuntosGuias { get; set; }
+        public DbSet<Nota> Notas { get; set; }
+        public DbSet<NotaImagen> NotaImagenes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -118,6 +120,27 @@ namespace ControlDespachos.Data
                 entity.HasOne(d => d.GuiaRemision)
                     .WithMany()
                     .HasForeignKey(d => d.GuiaId);
+            });
+
+            modelBuilder.Entity<Nota>(entity =>
+            {
+                entity.ToTable("notas");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.OvId).IsRequired().HasMaxLength(150);
+                entity.Property(e => e.OvNum).HasMaxLength(50);
+                entity.Property(e => e.UserName).HasMaxLength(150);
+                entity.Property(e => e.UserRole).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<NotaImagen>(entity =>
+            {
+                entity.ToTable("nota_imagenes");
+                entity.HasKey(e => e.Id);
+                
+                entity.HasOne(d => d.Nota)
+                    .WithMany(p => p.Imagenes)
+                    .HasForeignKey(d => d.NotaId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

@@ -1,0 +1,30 @@
+# .NET Core / Visual Studio
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.doccache
+*.suo
+*.usersettings
+*.lock.json
+.vs/
+.vscode/
+
+# Build artifacts
+*.exe
+*.dll
+*.pdb
+
+# Local settings
+appsettings.Development.json
+appsettings.Local.json
+
+# Temporary/System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Brain / Gemini artifacts
+brain/
+.resolved
