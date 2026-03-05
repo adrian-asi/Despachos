@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.API\\ControlDespachos.API.csproj": {}
+    "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\controldespachos.api\\ControlDespachos.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.API\\ControlDespachos.API.csproj": {
+    "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\controldespachos.api\\ControlDespachos.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.API\\ControlDespachos.API.csproj",
+        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\controldespachos.api\\ControlDespachos.API.csproj",
         "projectName": "ControlDespachos.API",
-        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.API\\ControlDespachos.API.csproj",
+        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\controldespachos.api\\ControlDespachos.API.csproj",
         "packagesPath": "C:\\Users\\analistaqds\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.API\\obj\\",
+        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\controldespachos.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,14 +32,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
-                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj"
+              "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
+                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj"
               },
-              "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj": {
-                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj"
+              "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj": {
+                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj"
               },
-              "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj": {
-                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj"
+              "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj": {
+                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj"
               }
             }
           }
@@ -104,14 +104,14 @@
         }
       }
     },
-    "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
+    "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj",
+        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj",
         "projectName": "ControlDespachos.Core",
-        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj",
+        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj",
         "packagesPath": "C:\\Users\\analistaqds\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\obj\\",
+        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -169,14 +169,14 @@
         }
       }
     },
-    "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj": {
+    "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj",
+        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj",
         "projectName": "ControlDespachos.Data",
-        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj",
+        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj",
         "packagesPath": "C:\\Users\\analistaqds\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\obj\\",
+        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -197,8 +197,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
-                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj"
+              "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
+                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj"
               }
             }
           }
@@ -244,14 +244,14 @@
         }
       }
     },
-    "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj": {
+    "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj",
+        "projectUniqueName": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj",
         "projectName": "ControlDespachos.Services",
-        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj",
+        "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Services\\ControlDespachos.Services.csproj",
         "packagesPath": "C:\\Users\\analistaqds\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Services\\obj\\",
+        "outputPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -272,11 +272,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
-                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj"
+              "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj": {
+                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Core\\ControlDespachos.Core.csproj"
               },
-              "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj": {
-                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\ControlDespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj"
+              "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj": {
+                "projectPath": "C:\\Users\\analistaqds\\Downloads\\Despachos\\controldespachos\\ControlDespachos.Data\\ControlDespachos.Data.csproj"
               }
             }
           }

@@ -362,6 +362,68 @@
             transform: none;
         }
 
+        /* ENV SELECTOR */
+        .env-select {
+            margin-bottom: 20px;
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(23, 84, 207, .04), rgba(62, 207, 142, .04));
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .env-select .env-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #64748b;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .env-pills {
+            display: flex;
+            gap: 8px;
+        }
+
+        .env-pill {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .2s;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .env-pill:hover {
+            transform: translateY(-1px);
+        }
+
+        .env-pill.prd.active {
+            border-color: #1754cf;
+            color: #1754cf;
+            background: rgba(23, 84, 207, .08);
+        }
+
+        .env-pill.demo.active {
+            border-color: #3ecf8e;
+            color: #059669;
+            background: rgba(62, 207, 142, .1);
+        }
+
+        .env-pill .env-badge-sm {
+            font-size: 0.65rem;
+            display: block;
+            margin-top: 2px;
+            opacity: .75;
+        }
+
         .role-select {
             margin-top: 24px;
             padding-top: 24px;
@@ -462,6 +524,21 @@
             <h3>Acceso Seguro</h3>
             <p class="subtitle">Ingresa tus credenciales para continuar al sistema</p>
 
+            <!-- SELECTOR DE ENTORNO -->
+            <div class="env-select">
+                <div class="env-label">⚙️ Entorno de Trabajo</div>
+                <div class="env-pills">
+                    <div class="env-pill prd active" id="pill-env-prd" onclick="selectEnv('SQL')">
+                        🗄️ PRD
+                        <span class="env-badge-sm">SQL Server</span>
+                    </div>
+                    <div class="env-pill demo" id="pill-env-demo" onclick="selectEnv('SUPABASE')">
+                        ☁️ DEMO
+                        <span class="env-badge-sm">Supabase</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="role-select">
                 <p>SELECCIONA TU ROL</p>
                 <div class="role-pills">
@@ -533,6 +610,13 @@
     <script>
         let captchaVerified = false;
         let selectedRole = 'VENDEDOR';
+        let selectedEnv = 'SQL';
+
+        function selectEnv(env) {
+            selectedEnv = env;
+            document.getElementById('pill-env-prd').classList.toggle('active', env === 'SQL');
+            document.getElementById('pill-env-demo').classList.toggle('active', env === 'SUPABASE');
+        }
 
         function selectRole(role) {
             selectedRole = role;
@@ -569,10 +653,10 @@
             btn.disabled = true;
             btn.innerHTML = '<span class="material-icons" style="animation:spin 1s linear infinite">sync</span> Verificando...';
 
-            // Demo auth: acepta cualquier email/password con captcha verificado
+            // Auth: acepta cualquier email/password con captcha verificado
             setTimeout(() => {
-                // Guardar sesión demo
                 sessionStorage.setItem('user', JSON.stringify({ email, role: selectedRole, name: email.split('@')[0] }));
+                sessionStorage.setItem('appEnv', selectedEnv);  // ← guarda entorno
                 window.location.href = 'ov_generadas.html';
             }, 1200);
         }
