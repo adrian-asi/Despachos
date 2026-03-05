@@ -1,0 +1,93 @@
+# Documentación Técnica: Control de Despachos v2.0
+
+Esta guía describe la arquitectura, organización y procedimientos de mantenimiento del sistema de Control de Despachos.
+
+---
+
+## 🏗️ Arquitectura del Sistema
+
+El sistema es una solución robusta dividida en un **Backend en .NET 8** y un **Frontend desacoplado** servido estáticamente.
+
+### Arquitectura de Capas (Backend)
+
+El backend utiliza una arquitectura de N-Capas para separar responsabilidades:
+
+```mermaid
+graph TD
+    API["ControlDespachos.API (Capa de Presentación)"]
+    Services["ControlDespachos.Services (Capa de Negocio)"]
+    Data["ControlDespachos.Data (Capa de Acceso a Datos)"]
+    Core["ControlDespachos.Core (Capa de Dominio/Entidades)"]
+    DB[(SQL Server)]
+
+    API --> Services
+    API --> Data
+    Services --> Core
+    Data --> Core
+    Data --> DB
+    API -.-> |Sirve Archivos Estáticos| WWW[wwwroot/index.html]
+```
+
+- **`ControlDespachos.API`**: Contiene los controladores y la configuración de inicio ([Program.cs](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/Program.cs), [appsettings.json](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/appsettings.json)).
+- **`ControlDespachos.Services`**: Implementa la lógica de negocio (ej. [OrdenVentaService.cs](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.Services/OrdenVentaService.cs)).
+- **`ControlDespachos.Data`**: Gestiona la persistencia con EF Core ([ApplicationDbContext.cs](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.Data/ApplicationDbContext.cs)).
+- **`ControlDespachos.Core`**: Define las entidades (POCOs) y enumeraciones globales.
+
+---
+
+## 🌐 Arquitectura del Frontend
+
+Ubicado en `ControlDespachos.API/wwwroot`, utiliza HTML5, CSS3 (Vanilla) y ES6 JavaScript.
+
+```mermaid
+graph LR
+    HTML[Páginas HTML]
+    CSS[css/main.css]
+    SHARED[js/shared.js]
+    NOTAS[js/notas.js]
+    
+    HTML --> CSS
+    HTML --> SHARED
+    HTML --> NOTAS
+```
+
+### Componentes de Lógica:
+- **[shared.js](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/shared.js)**: Maneja la navegación ([renderNav](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/shared.js#21-55)), autenticación ([requireAuth](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/shared.js#5-11)) y generación de datos simulados.
+- **[notas.js](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/notas.js)**: Sistema de mensajería independiente con persistencia en `LocalStorage`.
+
+---
+
+## 🗄️ Diccionario de Datos (Modelos Principales)
+
+| Entidad | Descripción | Campos Clave |
+| :--- | :--- | :--- |
+| [OrdenVenta](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.Core/Entities/OrdenVenta.cs#5-33) | Cabecera del pedido | `NumeroOv`, `ClienteNombre`, [Estado](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/shared.js#196-207), `Cantidad` |
+| [GuiaRemision](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.Core/Entities/GuiaRemision.cs#5-23) | Documento de despacho | `NumeroGre`, `OvId`, `CantidadEmitida`, `EstadoGre` |
+| [HojaRuta](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.Core/Entities/HojaRutaGuia.cs#5-14) | Planificación de transporte | `NumeroHr` (simulado), `Chofer`, `Placa` |
+| `CierreGuia` | Liquidación de entrega | [Estado](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/shared.js#196-207), `HoraFin`, `Kilometraje`, `Evidencias` |
+
+---
+
+## 🔄 Flujos de Trabajo (Workflows)
+
+1.  **Ingreso**: [index.html](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/index.html) → Login → Redirección a Dashboard.
+2.  **Seguimiento de OVs**: [ov_generadas.html](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/ov_generadas.html) → Revisión de pedidos pendientes.
+3.  **Programación**: [ov_emitidas.html](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/ov_emitidas.html) → Emisión de GREs (Guías de Remisión).
+4.  **Gestión de Rutas**: [hojas_ruta.html](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/hojas_ruta.html) → Asignación de GREs a Hojas de Ruta y Liquidación.
+5.  **Trazabilidad**: [seguimiento.html](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/seguimiento.html) → Vista detallada del estado de cada guía.
+
+---
+
+## 🛠️ Guía de Mantenimiento y Cambios
+
+### ¿Dónde modificar el sistema?
+
+- **Cambiar la Conexión a Base de Datos**: Edita [appsettings.json](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/appsettings.json) en el proyecto API.
+- **Agregar un nuevo botón al menú**: Modifica la lista `pages` en la función [renderNav](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/shared.js#21-55) de [js/shared.js](file:///c:/Users/analistaqds/Downloads/Despachos/ControlDespachos/ControlDespachos.API/wwwroot/js/shared.js).
+- **Ajustar el diseño (colores, sombras, etc.)**: Cambia las variables CSS en `:root` dentro de `css/main.css`.
+- **Implementar una nueva regla de negocio**: Crea o modifica métodos en `ControlDespachos.Services`.
+
+### Comandos de Base de Datos (Entity Framework):
+Si realizas cambios en las clases de `ControlDespachos.Core/Entities`, debes sincronizar la base de datos:
+1.  **Crear Migración**: `dotnet ef migrations add DescripcionCambio -p ControlDespachos.Data -s ControlDespachos.API`
+2.  **Aplicar a BD**: `dotnet ef database update -p ControlDespachos.Data -s ControlDespachos.API`
